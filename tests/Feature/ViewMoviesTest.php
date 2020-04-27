@@ -4,37 +4,51 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class ViewMoviesTest extends TestCase
 {
     /** @test */
-    public function the_main_page_shows_the_correct_info()
-    {
-        // Http::fake([
-        //     'https://api.themoviedb.org/3/movie/popular?language=ru-RU&region=RU' => $this->fakeMovies(),
-        //     'https://api.themoviedb.org/3/movie/now_playing?language=ru-RU&region=RU' => $this->fakeMovies(),
-        //     'https://api.themoviedb.org/3/genre/movie/list?language=ru-RU' => $this->fakeGenres()
-        // ]);
+    // public function the_main_page_shows_the_correct_info()
+    // {
+    //     // Http::fake([
+    //     //     'https://api.themoviedb.org/3/movie/popular?language=ru-RU&region=RU' => $this->fakeMovies(),
+    //     //     'https://api.themoviedb.org/3/movie/now_playing?language=ru-RU&region=RU' => $this->fakeMovies(),
+    //     //     'https://api.themoviedb.org/3/genre/movie/list?language=ru-RU' => $this->fakeGenres()
+    //     // ]);
 
-        $response = $this->get(route('movies.index'));
+    //     $response = $this->get(route('movies.index'));
 
-        $response->assertSuccessful();
-        $response->assertSee('Популярные фильмы');
-        // $response->assertSee('Fake Movie');
-    }
+    //     $response->assertSuccessful();
+    //     $response->assertSee('Популярные фильмы');
+    //     // $response->assertSee('Fake Movie');
+    // }
 
     /** @test */
-    public function the_movie_page_shows_the_correct_info()
+    // public function the_movie_page_shows_the_correct_info()
+    // {
+    //     Http::fake([
+    //         'https://api.themoviedb.org/3/movie/*' => $this->fakeSingleMovie()
+    //     ]);
+
+    //     $response = $this->get(route('movies.show', 419704));
+
+    //     $response->assertSuccessful();
+    //     $response->assertSee('К звёздам');
+    // }
+
+    /** @test */
+    public function the_search_dropdown_works_correctly()
     {
         Http::fake([
-            'https://api.themoviedb.org/3/movie/*' => $this->fakeSingleMovie()
+            'https://api.themoviedb.org/3/search/movie?language=ru-RU&query=Fake%20Movie' => $this->fakeMovies()
         ]);
 
-        $response = $this->get(route('movies.show', 419704));
-
-        $response->assertSuccessful();
-        $response->assertSee('К звёздам');
+        Livewire::test('search-dropdown')
+            ->assertDontSee('Fake Movie')
+            ->set('search', 'Fake Movie')
+            ->assertSee('Fake Movie');
     }
 
     private function fakeMovies()
