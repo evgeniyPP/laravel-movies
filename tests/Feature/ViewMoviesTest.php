@@ -23,6 +23,8 @@ class ViewMoviesTest extends TestCase
         $response->assertSuccessful();
         $response->assertSee('Популярные фильмы');
         $response->assertSee('Fake Movie');
+        $response->assertSee('боевик, приключения, мультфильм');
+        $response->assertSee('Смотрят сейчас');
     }
 
     /** @test */
@@ -36,6 +38,9 @@ class ViewMoviesTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertSee('Fake Jumanji: The Next Level');
+        $response->assertSee('Jake Kasdan');
+        $response->assertSee('Режиссер');
+        $response->assertSee('Dwayne Johnson');
     }
 
     /** @test */
@@ -66,8 +71,9 @@ class ViewMoviesTest extends TestCase
                     "original_language" => "en",
                     "original_title" => "Original Title of Fake Movie",
                     "genre_ids" => [
-                        0 => 37, // вестерн
-                        1 => 10402 // музыка
+                        28,
+                        12,
+                        16
                     ],
                     "title" => "Fake Movie",
                     "vote_average" => 10,
@@ -132,10 +138,10 @@ class ViewMoviesTest extends TestCase
                     [
                         "credit_id" => "5d51d4ff18b75100174608d8",
                         "department" => "Production",
-                        "gender" => 1,
+                        "gender" => 2,
                         "id" => 546,
-                        "job" => "Casting Director",
-                        "name" => "Jeanne McCarthy",
+                        "job" => "Director",
+                        "name" => "Jake Kasdan",
                         "profile_path" => null,
                     ]
                 ]
