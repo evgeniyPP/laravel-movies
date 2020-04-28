@@ -89,7 +89,7 @@ class MoviesController extends Controller
             'crew' => $crew,
             'isTrailer' => $isTrailer,
             'youtubeLink' => $isTrailer
-                ? "https://www.youtube.com/watch?v={$movie['videos']['results'][0]['key']}" : null,
+                ? "https://www.youtube.com/embed/{$movie['videos']['results'][0]['key']}" : null,
             'cast' => $movie['credits']['cast'],
             'images' => $movie['images']['backdrops']
         ]);
