@@ -27,6 +27,7 @@ class SingleTvShowViewModel extends ViewModel
         }
 
         return collect($this->tvshow)->merge([
+            'original_name' => $this->tvshow['original_language'] !== 'ru' ? $this->tvshow['original_name'] : '',
             'poster' => $this->tvshow['poster_path']
                 ? "https://image.tmdb.org/t/p/w500/{$this->tvshow['poster_path']}"
                 : 'https://via.placeholder.com/500x750',

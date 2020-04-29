@@ -36,6 +36,7 @@ class ViewMoviesTest extends TestCase
         $response = $this->get(route('movies.show', 419704));
 
         $response->assertSuccessful();
+        $response->assertSee('Джуманджи');
         $response->assertSee('Fake Jumanji: The Next Level');
         $response->assertSee('Jake Kasdan');
         $response->assertSee('Режиссер');
@@ -118,7 +119,9 @@ class ViewMoviesTest extends TestCase
             "poster_path" => "/bB42KDdfWkOvmzmYkmK58ZlCa9P.jpg",
             "release_date" => "2019-12-04",
             "runtime" => 123,
-            "title" => "Fake Jumanji: The Next Level",
+            "title" => "Джуманджи",
+            "original_title" => "Fake Jumanji: The Next Level",
+            "original_language" => "en",
             "vote_average" => 6.8,
             "credits" => [
                 "cast" => [

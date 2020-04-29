@@ -45,6 +45,7 @@ class ViewTvTest extends TestCase
         $response->assertSee('Во все тяжкие');
         $response->assertSee('драма');
         $response->assertSee('20.01.2008 - 29.09.2013');
+        $response->assertSee('Breaking Bad');
         $response->assertSee('Vince Gilligan');
     }
 
@@ -72,6 +73,7 @@ class ViewTvTest extends TestCase
             "first_air_date" => "2008-01-20",
             "last_air_date" => "2013-09-29",
             'in_production' => false,
+            "original_language" => "en",
             "runtime" => 123,
             "name" => "Во все тяжкие",
             "original_name" => "Breaking Bad",
@@ -156,6 +158,7 @@ class ViewTvTest extends TestCase
                     "vote_average" => 7.3,
                     "overview" => "The Simpsons description. The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet earth.",
                     "first_air_date" => "1989-12-17",
+                    "original_language" => "en",
                     'original_name' => "The Simpsons",
                     'in_production' => true
                 ]
@@ -180,6 +183,7 @@ class ViewTvTest extends TestCase
                         18,
                     ],
                     "name" => "Во все тяжкие",
+                    "original_language" => "en",
                     "vote_average" => 8.5,
                     "overview" => "Breaking Bad description. The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet earth.",
                     "first_air_date" => "2008-01-20",

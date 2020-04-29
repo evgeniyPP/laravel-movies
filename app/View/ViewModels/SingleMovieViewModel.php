@@ -27,6 +27,7 @@ class SingleMovieViewModel extends ViewModel
             'genres' => collect($this->movie['genres'])->pluck('name')->flatten()->implode(', '),
             'images' => collect($this->movie['images']['backdrops'])->take(9),
             'cast' => collect($this->movie['credits']['cast'])->take(10),
+            'original_title' => $this->movie['original_language'] !== 'ru' ? $this->movie['original_title'] : '',
             'hasTrailer' => $hasTrailer,
             'trailer' => $hasTrailer
                 ? "https://www.youtube.com/embed/{$this->movie['videos']['results'][0]['key']}"
@@ -60,7 +61,8 @@ class SingleMovieViewModel extends ViewModel
             'hasTrailer',
             'trailer',
             'cast',
-            'images'
+            'images',
+            'original_title'
         ]);
     }
 }

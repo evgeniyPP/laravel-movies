@@ -16,6 +16,7 @@
                     <span class="mx-2">|</span>
                     <span>{{ $tvshow['genres'] }}</span>
                 </div>
+                <div class="text-gray-400 text-sm truncate">{{ $tvshow['original_name'] }}</div>
 
                 <p class="text-gray-300 mt-8">
                     {{ $tvshow['overview'] }}
