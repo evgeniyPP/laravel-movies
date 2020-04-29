@@ -19,7 +19,9 @@ class SingleMovieViewModel extends ViewModel
         $hasTrailer = !empty($this->movie['videos']['results']);
 
         return collect($this->movie)->merge([
-            'poster' => "https://image.tmdb.org/t/p/w500/{$this->movie['poster_path']}",
+            'poster' => $this->movie['poster_path']
+                ? "https://image.tmdb.org/t/p/w500/{$this->movie['poster_path']}"
+                : 'https://via.placeholder.com/500x750',
             'rating' => $this->movie['vote_average'] * 10 . '%',
             'date' => Carbon::parse($this->movie['release_date'])->format('m/Y'),
             'genres' => collect($this->movie['genres'])->pluck('name')->flatten()->implode(', '),
