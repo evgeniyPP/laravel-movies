@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\ViewModels\MoviesViewModel;
-use App\ViewModels\SingleMovieViewModel;
+use App\View\ViewModels\MoviesViewModel;
+use App\View\ViewModels\SingleMovieViewModel;
 use Illuminate\Support\Facades\Http;
 
 class MoviesController extends Controller

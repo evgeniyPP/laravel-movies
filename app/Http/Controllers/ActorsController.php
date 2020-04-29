@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\ViewModels\ActorsViewModel;
-use App\ViewModels\SingleActorViewModel;
+use App\View\ViewModels\ActorsViewModel;
+use App\View\ViewModels\SingleActorViewModel;
 use Illuminate\Support\Facades\Http;
 
 class ActorsController extends Controller

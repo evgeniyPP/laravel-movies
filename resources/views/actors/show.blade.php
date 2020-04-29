@@ -56,10 +56,10 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
                     @foreach ($knownFor as $movie)
                         <div class="mt-4">
-                            <a href="{{ route('movies.show', $movie['id']) }}">
+                            <a href="{{ $movie['link'] }}">
                                 <img src="{{ $movie['poster'] }}" alt="poster" class="hover:opacity-75 transition ease-in-out duration-150">
                             </a>
-                            <a href="{{ route('movies.show', $movie['id']) }}" class="text-sm leading-normal block text-gray-400 hover:text-white mt-1">{{ $movie['title'] }}</a>
+                            <a href="{{ $movie['link'] }}" class="text-sm leading-normal block text-gray-400 hover:text-white mt-1">{{ $movie['title'] }}</a>
                         </div>
                     @endforeach
                 </div>
@@ -74,7 +74,7 @@
                 @foreach ($credits as $credit)
                 <li>
                     {{ $credit['release_year'] }} &middot;
-                    <strong><a href="#" class="hover:underline">{{ $credit['title'] }}</a></strong>
+                    <strong><a href="{{ $credit['link'] }}" class="hover:underline">{{ $credit['title'] }}</a></strong>
                     {{ $credit['character'] ? "в роли {$credit['character']}" : '' }}
                 </li>
                 @endforeach

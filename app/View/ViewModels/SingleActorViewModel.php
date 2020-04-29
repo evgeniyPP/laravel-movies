@@ -1,9 +1,8 @@
 <?php
 
-namespace App\ViewModels;
+namespace App\View\ViewModels;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\URL;
 use Spatie\ViewModels\ViewModel;
 
 class SingleActorViewModel extends ViewModel
@@ -43,23 +42,32 @@ class SingleActorViewModel extends ViewModel
     {
         $cast = collect($this->credits)->get('cast');
 
-        return collect($cast)->where('media_type', 'movie')->sortByDesc('popularity')->take(5)
-            ->map(function ($movie) {
-                $title = isset($movie['title']) && $movie['title'] ? $movie['title'] : 'Без названия';
-                $originalTitle = isset($movie['original_title']) && $movie['original_title']
-                    ? $movie['original_title'] : 'Untitled';
+        return collect($cast)->sortByDesc('popularity')->take(5)->map(function ($movie) {
+            if (isset($movie['title']) && $movie['title']) {
+                $title = $movie['title'];
+                $originalTitle = $movie['original_title'];
+            } elseif (isset($movie['name']) && $movie['name']) {
+                $title = $movie['name'];
+                $originalTitle = $movie['original_name'];
+            } else {
+                $title = 'Без названия';
+                $originalTitle = 'Untitled';
+            }
 
-                if ($movie['original_language'] !== 'ru') {
-                    $title .= " ({$originalTitle})";
-                }
+            if ($movie['original_language'] !== 'ru') {
+                $title .= " ({$originalTitle})";
+            }
 
-                return collect($movie)->merge([
-                    'poster' => $movie['poster_path']
-                        ? "https://image.tmdb.org/t/p/w185/{$movie['poster_path']}"
-                        : 'https://via.placeholder.com/185x278',
-                    'title' => $title
-                ]);
-            });
+            return collect($movie)->merge([
+                'poster' => $movie['poster_path']
+                    ? "https://image.tmdb.org/t/p/w185/{$movie['poster_path']}"
+                    : 'https://via.placeholder.com/185x278',
+                'title' => $title,
+                'link' => $movie['media_type'] === 'movie'
+                    ? route('movies.show', $movie['id'])
+                    : route('tv.show', $movie['id'])
+            ])->only(['poster', 'title', 'link']);
+        });
     }
 
     public function credits()
@@ -89,7 +97,9 @@ class SingleActorViewModel extends ViewModel
                     'release_year' => isset($releaseDate) ? Carbon::parse($releaseDate)->format('Y') : null,
                     'title' => $title,
                     'character' => isset($movie['character']) ? $movie['character'] : '',
-                    'link' => URL::to("/movies/{$movie['id']}")
+                    'link' => $movie['media_type'] === 'movie'
+                        ? route('movies.show', $movie['id'])
+                        : route('tv.show', $movie['id'])
                 ])->only(['character', 'title', 'release_date', 'release_year', 'link']);
             })->filter(function ($movie) {
                 return $movie['release_date'];

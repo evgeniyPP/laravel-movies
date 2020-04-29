@@ -22,7 +22,7 @@
                     <a href="{{ route('movies.index') }}" class="hover:text-gray-300">Фильмы</a>
                 </li>
                 <li class="md:ml-6 mt-3 md:mt-0">
-                    <a href="#" class="hover:text-gray-300">ТВ-шоу</a>
+                    <a href="{{ route('tv.index') }}" class="hover:text-gray-300">ТВ-шоу</a>
                 </li>
                 <li class="md:ml-6 mt-3 md:mt-0">
                     <a href="{{ route('actors.index') }}" class="hover:text-gray-300">Актеры</a>

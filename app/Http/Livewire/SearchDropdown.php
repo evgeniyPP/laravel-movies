@@ -19,7 +19,7 @@ class SearchDropdown extends Component
                 ->json()['results'];
         }
 
-        return view('livewire.search-dropdown', [
+        return view('components.search-dropdown', [
             'searchResults' => collect($searchResults)->sortByDesc('popularity')->take(7)
         ]);
     }

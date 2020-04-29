@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ViewModels;
+namespace App\View\ViewModels;
 
 use Carbon\Carbon;
 use Spatie\ViewModels\ViewModel;
@@ -46,8 +46,9 @@ class MoviesViewModel extends ViewModel
                 'poster' => "https://image.tmdb.org/t/p/w500/{$movie['poster_path']}",
                 'rating' => $movie['vote_average'] * 10 . '%',
                 'date' => Carbon::parse($movie['release_date'])->format('m/Y'),
-                'genres' => $genresFormatted
-            ])->only('id', 'title', 'poster', 'rating', 'date', 'genres');
+                'genres' => $genresFormatted,
+                'original_title' => $movie['original_language'] !== 'ru' ? $movie['original_title'] : ''
+            ])->only('id', 'title', 'poster', 'rating', 'date', 'genres', 'original_title');
         });
     }
 }
